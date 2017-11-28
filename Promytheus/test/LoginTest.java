@@ -1,4 +1,4 @@
-package com.Promytheus;
+package com.Promytheus.test;
 
 import java.util.concurrent.TimeUnit;
 
@@ -10,6 +10,11 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
+
+import com.Promytheus.modules.Modules;
+import com.Promytheus.pages.LoginPage;
+import com.Promytheus.pages.MainPage;
+import com.Promytheus.pages.Util;
 
 public class LoginTest {
 
@@ -58,6 +63,7 @@ public class LoginTest {
 		softAccert.assertEquals(Util.EXPECT_LOGIN_ERROR, LoginPage.loginError.getText());
 		Modules.login("0000000", "0000000");
 		softAccert.assertEquals(Util.EXPECT_LOGIN_ERROR, LoginPage.loginError.getText());
+		softAccert.assertAll();
 		}
 		
 	@AfterMethod

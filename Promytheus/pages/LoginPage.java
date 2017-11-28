@@ -1,4 +1,4 @@
-package com.Promytheus;
+package com.Promytheus.pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -18,6 +18,7 @@ public class LoginPage {
 	
 	@FindBy(how=How.NAME, using="password")
 	public static WebElement password;
+
 	
 	@FindBy(how=How.ID, using="login")
 	public static WebElement btnLogin;
