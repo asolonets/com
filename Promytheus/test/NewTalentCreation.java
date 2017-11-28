@@ -38,7 +38,6 @@ public class NewTalentCreation {
 		data[2][1] = "invalid";
 		// 4th row
 		data[3][0] = "invalid";
-
 		data[3][1] = "invalid";
 		return data;
 	}

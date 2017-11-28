@@ -13,7 +13,7 @@ public class Util {
     public static final String PASSWD = "123456";
     
     
-    public static final String EXPECT_IN_MAIN_PAGE = "© 2017 ProMytheUs from Undercover Productions Pte Ltd to 21st Century Lions";
+    public static final String EXPECT_IN_MAIN_PAGE = "Â© 2017 ProMytheUs from Undercover Productions Pte Ltd to 21st Century Lions";
     public static final String EXPECT_LOGIN_ERROR = "Invalid Email or Password.";
     
     
