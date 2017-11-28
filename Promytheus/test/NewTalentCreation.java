@@ -55,9 +55,7 @@ public class NewTalentCreation {
 		PageFactory.initElements(driver, MainPage.class);
 		// SoftAssert softAccert = new SoftAssert();
 		Modules.login(Util.USER_NAME, Util.PASSWD);
-		System.out.println(Modules.isLoginSucsessful());
-		System.out.println(Util.EXPECT_IN_MAIN_PAGE);
-		assertTrue(Modules.isLoginSucsessful().equals(Util.EXPECT_IN_MAIN_PAGE));
+		assertTrue(Modules.isLoginSucsessful());
 		MainPage.createNewTalentBtn.click();
 		Thread.sleep(2000);
 		MainPage.categoryChouse.click();

@@ -14,18 +14,15 @@ public class Modules {
 		LoginPage.password.sendKeys(password);
 		LoginPage.btnLogin.click();
 	}
-	public static String isLoginSucsessful() {
-				
-		return MainPage.mainPageInfo.getText();
+	public static boolean isLoginSucsessful() {
+
+		return MainPage.mainPageInfo.getText().equals(Util.EXPECT_IN_MAIN_PAGE);
 		
 	}
-	
 	public static void signOut(){
 		MainPage.userBtn.click();
 		MainPage.signOutBtn.click();
-		//GitHub update
-		MainPage.signOutBtn.click();
-		
+
 	}
 	public static int randGeneration(){
 		Random rand = new Random();

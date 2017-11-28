@@ -18,12 +18,15 @@ public class LoginPage {
 	
 	@FindBy(how=How.NAME, using="password")
 	public static WebElement password;
-
 	
 	@FindBy(how=How.ID, using="login")
 	public static WebElement btnLogin;
 			
 	@FindBy(how=How.XPATH, using="html/body/app/ui-view/auth-zone/ui-view/sign-in-form/spinner-container/div[1]/div/div/form/div[3]")
 	public static WebElement loginError;
+
+	@FindBy(how=How.LINK_TEXT, using="Register Now")
+	public static WebElement registerNow;
+
 	
 }
