@@ -23,6 +23,9 @@ public class Modules {
 	public static void signOut(){
 		MainPage.userBtn.click();
 		MainPage.signOutBtn.click();
+		//GitHub update
+		MainPage.signOutBtn.click();
+		
 	}
 	public static int randGeneration(){
 		Random rand = new Random();
