@@ -16,11 +16,14 @@ public class MainPage {
 	@FindBy(how=How.XPATH, using="html/body/app/ui-view/public-area/div/footer/div[1]")
 	public static WebElement mainPageInfo;
 	
-	@FindBy(how=How.XPATH, using="html/body/app/ui-view/public-area/div/header/nav/div[2]/ul[2]/li[2]/a/em")
+	@FindBy(how=How.CLASS_NAME, using="icon-user")
 	public static WebElement userBtn;
 	
-	@FindBy(how=How.XPATH, using="html/body/app/ui-view/public-area/div/header/nav/div[2]/ul[2]/li[2]/ul/li/div/a[2]/div/div[2]/p")
+	@FindBy(how=How.XPATH, using="html/body/app/ui-view/public-area/div/header/nav/div[2]/ul[2]/li[2]/ul/li/div/a[1]/div/div[2]/p")
 	public static WebElement signOutBtn;
+
+	@FindBy(how=How.XPATH, using="html/body/app/ui-view/public-area/div/header/nav/div[2]/ul[2]/li[2]/ul/li/div/a[1]")
+	public static WebElement myProfileBtn;
 		
 	@FindBy(how=How.XPATH, using="html/body/app/ui-view/public-area/div/ui-view/talents-section/div/section/div/div/spinner-container/div[1]/div/div[1]/div/div/div/a")
 	public static WebElement createNewTalentBtn ;

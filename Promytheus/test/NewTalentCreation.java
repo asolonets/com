@@ -61,7 +61,6 @@ public class NewTalentCreation {
 		MainPage.categoryChouse.click();
 		MainPage.categoryChouseEngineering.click();
 		MainPage.nextBtnCategory.click();
-		// MainPage.nextBtnCategory.click();
 		// Thread.sleep(2000);
 		// MainPage.talentTraits1.sendKeys(Integer.toHexString(Modules.randGeneration()));
 		// MainPage.talentTraits2.sendKeys(Integer.toHexString(Modules.randGeneration()));

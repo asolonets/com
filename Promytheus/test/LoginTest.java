@@ -10,6 +10,8 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
+import org.openqa.selenium.NoAlertPresentException;
+
 
 import com.Promytheus.modules.Modules;
 import com.Promytheus.pages.LoginPage;
@@ -49,26 +51,24 @@ public class LoginTest {
 		driver.get(baseUrl);
 		driver.manage().timeouts().implicitlyWait(Util.WAIT_TIME, TimeUnit.SECONDS);
 	}
-	@Test
-	public void LoginTestCase_new() throws InterruptedException {
+	@Test(dataProvider = "LoginCredentials")
+	public void LoginTestCase_new(String userName, String password) throws InterruptedException {
 		PageFactory.initElements(driver, LoginPage.class);
 		PageFactory.initElements(driver, MainPage.class);
 		SoftAssert softAccert = new SoftAssert();
-		Modules.login(Util.USER_NAME, Util.PASSWD);
-		if (LoginPage.loginError.isDisplayed()) {
-			softAccert.assertEquals(Util.EXPECT_LOGIN_ERROR, LoginPage.loginError.getText());
-		}
-		else softAccert.assertEquals(Util.EXPECT_IN_MAIN_PAGE, MainPage.mainPageInfo.getText());
 
-//		softAccert.assertEquals(Util.EXPECT_IN_MAIN_PAGE, MainPage.mainPageInfo.getText());
-//		Modules.signOut();
-//		Modules.login(Util.USER_NAME, "0000000");
-//		softAccert.assertEquals(Util.EXPECT_LOGIN_ERROR, LoginPage.loginError.getText());
-//		Modules.login("0000000", Util.PASSWD);
-//		softAccert.assertEquals(Util.EXPECT_LOGIN_ERROR, LoginPage.loginError.getText());
-//		Modules.login("0000000", "0000000");
-//		softAccert.assertEquals(Util.EXPECT_LOGIN_ERROR, LoginPage.loginError.getText());
-//		softAccert.assertAll();
+		Modules.login(userName, password);
+		Thread.sleep(2000);
+		try{
+			LoginPage.loginError.getText();
+			//System.out.println(LoginPage.loginError.getText());
+			softAccert.assertEquals(LoginPage.loginError.getText(), Util.EXPECT_LOGIN_ERROR );
+		}
+		catch(NoAlertPresentException Ex){
+			softAccert.assertEquals(MainPage.mainPageInfo.getText(), Util.EXPECT_IN_MAIN_PAGE);
+			//System.out.println(MainPage.mainPageInfo.getText());
+		}
+
 		}
 		
 	@AfterMethod
