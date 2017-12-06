@@ -7,6 +7,11 @@ import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
 
 public class MyProfilePage {
+
+    public MyProfilePage(WebDriver driver) {
+        PageFactory.initElements(driver, this);
+    }
+    
     public static WebDriver driver;
     @FindBy(how = How.ID, using = "firstName")
     public static WebElement firstName;
@@ -29,8 +34,5 @@ public class MyProfilePage {
     @FindBy(how = How.ID, using = "updateProfile")
     public static WebElement updateProfileBtn;
 
-    public MyProfilePage(WebDriver driver) {
-        PageFactory.initElements(driver, this);
-    }
 
 }
