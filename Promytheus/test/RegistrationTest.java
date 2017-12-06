@@ -2,10 +2,17 @@ package com.Promytheus.test;
 
 import com.Promytheus.modules.Modules;
 import com.Promytheus.modules.datadriven.ExcelUtility;
-import com.Promytheus.pages.*;
+import com.Promytheus.pages.LoginPage;
+import com.Promytheus.pages.MainPage;
+import com.Promytheus.pages.MyProfilePage;
+import com.Promytheus.pages.RegistrationPage;
+import com.Promytheus.testdata.Util;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 import java.util.concurrent.TimeUnit;
@@ -19,6 +26,13 @@ public class RegistrationTest {
     public Object[][] loginTestData() throws Exception {
         ExcelUtility.setExcelFile(Util.TEST_DATA_FILE_PATH, "RegistrationTest");
         Object[][] testData = ExcelUtility.getTestData("RegistrationTestData");
+        return testData;
+    }
+
+    @DataProvider(name = "RegistrationCheckTest")
+    public Object[][] registrationCheckTestData() throws Exception {
+        ExcelUtility.setExcelFile(Util.TEST_DATA_FILE_PATH, "RegistrationCheckTest");
+        Object[][] testData = ExcelUtility.getTestData("RegistrationCheckTest");
         return testData;
     }
     @BeforeMethod
@@ -60,11 +74,19 @@ public class RegistrationTest {
         registrationPage.createAccountBtn.click();
 
     }
-    @Test(priority = 1)
-    @Parameters({"firstName", "middleName", "lastName", "signUpAddress", "city", "email", "phone", "state", "postCode", "password"})
-    public void registrationCheckTestCase(String firstName, String middleName, String lastName, String signUpAddress,
-                                     String city, String email, String phone, String state, String postCode, String password) throws InterruptedException {
 
+    @Test(priority = 1, dataProvider = "NewTalentTestData")
+    //@Parameters({"firstName", "middleName", "lastName", "signUpAddress", "city", "email", "phone", "state", "postCode", "password"})
+    public void registrationCheckTestCase(String firstName,
+                                          String middleName,
+                                          String lastName,
+                                          String signUpAddress,
+                                          String city,
+                                          String email,
+                                          String phone,
+                                          String state,
+                                          String postCode,
+                                          String password) throws InterruptedException {
         Modules modules = new Modules();
         MainPage mainPage = new MainPage(driver);
         MyProfilePage myProfilePage = new MyProfilePage(driver);

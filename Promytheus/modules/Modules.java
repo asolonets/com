@@ -2,7 +2,7 @@ package com.Promytheus.modules;
 
 import com.Promytheus.pages.LoginPage;
 import com.Promytheus.pages.MainPage;
-import com.Promytheus.pages.Util;
+import com.Promytheus.testdata.Util;
 
 import java.util.Random;
 

@@ -4,7 +4,7 @@ import com.Promytheus.modules.Modules;
 import com.Promytheus.modules.datadriven.ExcelUtility;
 import com.Promytheus.pages.LoginPage;
 import com.Promytheus.pages.MainPage;
-import com.Promytheus.pages.Util;
+import com.Promytheus.testdata.Util;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterMethod;

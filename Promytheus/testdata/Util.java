@@ -1,4 +1,4 @@
-package com.Promytheus.pages;
+package com.Promytheus.testdata;
 
 public class Util {
 

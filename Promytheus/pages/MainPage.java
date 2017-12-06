@@ -9,12 +9,17 @@ import org.openqa.selenium.support.PageFactory;
 public class MainPage {
 	
 	public static WebDriver driver;
-
     /****************************************************************************************************************************
      * Talent Traits Page
      */
 
     public static final String traitStart = ".//*[@id='talentForm']/wizard-form/div/div[1]/div[1]/fieldset[3]/div[2]/div/div[2]/div/fieldset[";
+
+
+    public MainPage(WebDriver driver) {
+
+        PageFactory.initElements(driver, this);
+    }
 
     @FindBy(how=How.XPATH, using="html/body/app/ui-view/public-area/div/footer/div[1]")
 	public static WebElement mainPageInfo;
@@ -30,6 +35,7 @@ public class MainPage {
 		
 	@FindBy(how=How.XPATH, using="html/body/app/ui-view/public-area/div/ui-view/talents-section/div/section/div/div/spinner-container/div[1]/div/div[1]/div/div/div/a")
 	public static WebElement createNewTalentBtn ;
+
     public static final String traitFinish = "]/trait-scaler/button[";
     public static final String traitFinishLastSimbol = "]";
     /***************************************************************************************************************************
@@ -108,11 +114,6 @@ public class MainPage {
 
 	@FindBy(how=How.XPATH, using=".//*[@id='talentForm']/wizard-form/div/div[2]/button[2]")
 	public static WebElement nextBtnCategory;
-
-    public MainPage(WebDriver driver) {
-        PageFactory.initElements(driver, this);
-    }
-		
 	}
 	
 	

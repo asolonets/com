@@ -1,15 +1,17 @@
 package com.Promytheus.test;
 
 import com.Promytheus.modules.Modules;
+import com.Promytheus.modules.datadriven.ExcelUtility;
+import com.Promytheus.pages.LoginPage;
 import com.Promytheus.pages.MainPage;
-import com.Promytheus.pages.Util;
+import com.Promytheus.testdata.Util;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Parameters;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.util.concurrent.TimeUnit;
@@ -22,6 +24,12 @@ public class NewTalentCreation {
     private WebDriver driver;
     private String baseUrl;
 
+    @DataProvider(name = "NewTalentTestData")
+    public Object[][] newTalentTestData() throws Exception {
+        ExcelUtility.setExcelFile(Util.TEST_DATA_FILE_PATH, "NewTalentTest");
+        Object[][] testData = ExcelUtility.getTestData("NewTalentTestData");
+        return testData;
+    }
 
     @BeforeMethod
     public void setUp() throws Exception {
@@ -31,8 +39,7 @@ public class NewTalentCreation {
         driver.manage().timeouts().implicitlyWait(Util.WAIT_TIME, TimeUnit.SECONDS);
     }
 
-    @Test
-    @Parameters({"talentFirstName", "talentMiddleName", "talentLastName", "talentSex", "talentDateOfBirth", "talentAddress", "talentCity", "talentEmail", "talentPhone", "talentState", "talentPostCode"})
+    @Test(dataProvider = "NewTalentTestData")
     public void newTalentCreation(String firstName,
                                   String middleName,
                                   String lastName,
@@ -46,58 +53,61 @@ public class NewTalentCreation {
                                   String postCode) throws InterruptedException {
         // Modules.login(Util.USER_NAME, Util.PASSWD);
         Modules modules = new Modules();
+        LoginPage login = new LoginPage(driver);
         modules.login(Util.USER_NAME, Util.PASSWD);
+        MainPage mainPage = new MainPage(driver);
         assertTrue(modules.isLoginSucsessful());
-        MainPage.createNewTalentBtn.click();
+
+        mainPage.createNewTalentBtn.click();
         Thread.sleep(3000);
-        MainPage.categoryChouse.click();
-        MainPage.categoryChouseEngineering.click();
-        MainPage.nextBtnCategory.click();
-        MainPage.firstName.sendKeys(firstName);
-        MainPage.middleName.sendKeys(middleName);
-        MainPage.lastName.sendKeys(lastName);
+        mainPage.categoryChouse.click();
+        mainPage.categoryChouseEngineering.click();
+        mainPage.nextBtnCategory.click();
+        mainPage.firstName.sendKeys(firstName);
+        mainPage.middleName.sendKeys(middleName);
+        mainPage.lastName.sendKeys(lastName);
         if (sex.equals("Male"))
-            MainPage.sexMaleRadioBtn.click();
+            mainPage.sexMaleRadioBtn.click();
         else if (sex.equals("Female"))
-            MainPage.sexFemaleRadioBtn.click();
+            mainPage.sexFemaleRadioBtn.click();
         else
-            MainPage.sexOtherRadioBtn.click();
-        MainPage.dateOfBirth.sendKeys(dateOfBirth);
-        MainPage.placeOfBirth.sendKeys(city);
-        MainPage.adressL1.sendKeys(signUpAddress);
-        MainPage.city.sendKeys(city);
-        MainPage.state.sendKeys(state);
-        MainPage.postCode.sendKeys(postCode);
-        MainPage.nextBtnCategory.click();
+            mainPage.sexOtherRadioBtn.click();
+        mainPage.dateOfBirth.sendKeys(dateOfBirth);
+        mainPage.placeOfBirth.sendKeys(city);
+        mainPage.adressL1.sendKeys(signUpAddress);
+        mainPage.city.sendKeys(city);
+        mainPage.state.sendKeys(state);
+        mainPage.postCode.sendKeys(postCode);
+        mainPage.nextBtnCategory.click();
         Thread.sleep(2000);
         //Randomly check traits
         for (int i = 1; i <= 20; i++) {
             String Xpath;
-            Xpath = MainPage.traitStart + i + MainPage.traitFinish + Modules.randGeneration() + MainPage.traitFinishLastSimbol;
+            Xpath = mainPage.traitStart + i + mainPage.traitFinish + modules.randGeneration() + mainPage.traitFinishLastSimbol;
             driver.findElement(By.xpath(Xpath)).click();
         }
-        MainPage.nextBtnCategory.click();
+        mainPage.nextBtnCategory.click();
         Thread.sleep(2000);
         //Check personal traits
         for (int i = 1; i <= 20; i += 2) {
             String Xpath;
-            Xpath = MainPage.personalityTraitStart + i + MainPage.personalityTraitFinish;
+            Xpath = mainPage.personalityTraitStart + i + mainPage.personalityTraitFinish;
             driver.findElement(By.xpath(Xpath)).click();
         }
-        MainPage.nextBtnCategory.click();
-        Select sel = new Select(MainPage.interestLevelStoryPageSelectElement);
+        mainPage.nextBtnCategory.click();
+        Select sel = new Select(mainPage.interestLevelStoryPageSelectElement);
         sel.selectByIndex(2);
 
-        MainPage.nextBtnCategory.click();
-        MainPage.nextBtnCategory.click();
-        MainPage.nextBtnCategory.click();
-        MainPage.nextBtnCategory.click();
-        MainPage.nextBtnCategory.click();
-        MainPage.nextBtnCategory.click();
+        mainPage.nextBtnCategory.click();
+        mainPage.nextBtnCategory.click();
+        mainPage.nextBtnCategory.click();
+        mainPage.nextBtnCategory.click();
+        mainPage.nextBtnCategory.click();
+        mainPage.nextBtnCategory.click();
 
         //System.out.print(MainPage.talentCreatedFirstRowName.getText()+"**************************************");
         String fullName = firstName + " " + middleName + " " + lastName;
-        assertEquals(MainPage.talentCreatedFirstRowName.getText(), fullName);
+        assertEquals(mainPage.talentCreatedFirstRowName.getText(), fullName);
     }
 
     @AfterMethod
