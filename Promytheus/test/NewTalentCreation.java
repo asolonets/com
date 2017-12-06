@@ -1,99 +1,107 @@
 package com.Promytheus.test;
 
-import static org.testng.Assert.assertTrue;
+import com.Promytheus.modules.Modules;
+import com.Promytheus.pages.MainPage;
+import com.Promytheus.pages.Util;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.Select;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
 
 import java.util.concurrent.TimeUnit;
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.support.PageFactory;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;
-
-import com.Promytheus.modules.Modules;
-import com.Promytheus.pages.LoginPage;
-import com.Promytheus.pages.MainPage;
-import com.Promytheus.pages.Util;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 public class NewTalentCreation {
 
-	private WebDriver driver;
-	private String baseUrl;
+    private WebDriver driver;
+    private String baseUrl;
 
-	@DataProvider(name = "LoginCredentials")
-	public Object[][] testData() throws Exception {
 
-		Object[][] data = new Object[4][2];
+    @BeforeMethod
+    public void setUp() throws Exception {
+        driver = new FirefoxDriver();
+        baseUrl = Util.BASE_URL;
+        driver.get(baseUrl);
+        driver.manage().timeouts().implicitlyWait(Util.WAIT_TIME, TimeUnit.SECONDS);
+    }
 
-		// 1st row
-		data[0][0] = Util.USER_NAME;
-		data[0][1] = Util.PASSWD;
-		// 2nd row
-		data[1][0] = "invalid";
-		data[1][1] = Util.PASSWD;
-		// 3rd row
-		data[2][0] = Util.USER_NAME;
-		data[2][1] = "invalid";
-		// 4th row
-		data[3][0] = "invalid";
-		data[3][1] = "invalid";
-		return data;
-	}
+    @Test
+    @Parameters({"talentFirstName", "talentMiddleName", "talentLastName", "talentSex", "talentDateOfBirth", "talentAddress", "talentCity", "talentEmail", "talentPhone", "talentState", "talentPostCode"})
+    public void newTalentCreation(String firstName,
+                                  String middleName,
+                                  String lastName,
+                                  String sex,
+                                  String dateOfBirth,
+                                  String signUpAddress,
+                                  String city,
+                                  String email,
+                                  String phone,
+                                  String state,
+                                  String postCode) throws InterruptedException {
+        // Modules.login(Util.USER_NAME, Util.PASSWD);
+        Modules modules = new Modules();
+        modules.login(Util.USER_NAME, Util.PASSWD);
+        assertTrue(modules.isLoginSucsessful());
+        MainPage.createNewTalentBtn.click();
+        Thread.sleep(3000);
+        MainPage.categoryChouse.click();
+        MainPage.categoryChouseEngineering.click();
+        MainPage.nextBtnCategory.click();
+        MainPage.firstName.sendKeys(firstName);
+        MainPage.middleName.sendKeys(middleName);
+        MainPage.lastName.sendKeys(lastName);
+        if (sex.equals("Male"))
+            MainPage.sexMaleRadioBtn.click();
+        else if (sex.equals("Female"))
+            MainPage.sexFemaleRadioBtn.click();
+        else
+            MainPage.sexOtherRadioBtn.click();
+        MainPage.dateOfBirth.sendKeys(dateOfBirth);
+        MainPage.placeOfBirth.sendKeys(city);
+        MainPage.adressL1.sendKeys(signUpAddress);
+        MainPage.city.sendKeys(city);
+        MainPage.state.sendKeys(state);
+        MainPage.postCode.sendKeys(postCode);
+        MainPage.nextBtnCategory.click();
+        Thread.sleep(2000);
+        //Randomly check traits
+        for (int i = 1; i <= 20; i++) {
+            String Xpath;
+            Xpath = MainPage.traitStart + i + MainPage.traitFinish + Modules.randGeneration() + MainPage.traitFinishLastSimbol;
+            driver.findElement(By.xpath(Xpath)).click();
+        }
+        MainPage.nextBtnCategory.click();
+        Thread.sleep(2000);
+        //Check personal traits
+        for (int i = 1; i <= 20; i += 2) {
+            String Xpath;
+            Xpath = MainPage.personalityTraitStart + i + MainPage.personalityTraitFinish;
+            driver.findElement(By.xpath(Xpath)).click();
+        }
+        MainPage.nextBtnCategory.click();
+        Select sel = new Select(MainPage.interestLevelStoryPageSelectElement);
+        sel.selectByIndex(2);
 
-	@BeforeMethod
-	public void setUp() throws Exception {
-		driver = new FirefoxDriver();
-		baseUrl = Util.BASE_URL;
-		driver.get(baseUrl);
-		driver.manage().timeouts().implicitlyWait(Util.WAIT_TIME, TimeUnit.SECONDS);
-	}
-	@Test
-	public void newTalentCreation() throws InterruptedException {
-		PageFactory.initElements(driver, LoginPage.class);
-		PageFactory.initElements(driver, MainPage.class);
-		// SoftAssert softAccert = new SoftAssert();
-		Modules.login(Util.USER_NAME, Util.PASSWD);
-		assertTrue(Modules.isLoginSucsessful());
-		MainPage.createNewTalentBtn.click();
-		Thread.sleep(2000);
-		MainPage.categoryChouse.click();
-		MainPage.categoryChouseEngineering.click();
-		MainPage.nextBtnCategory.click();
-		// Thread.sleep(2000);
-		// MainPage.talentTraits1.sendKeys(Integer.toHexString(Modules.randGeneration()));
-		// MainPage.talentTraits2.sendKeys(Integer.toHexString(Modules.randGeneration()));
-		// MainPage.talentTraits3.sendKeys(Integer.toHexString(Modules.randGeneration()));
-		// MainPage.talentTraits4.sendKeys(Integer.toHexString(Modules.randGeneration()));
-		// MainPage.talentTraits5.sendKeys(Integer.toHexString(Modules.randGeneration()));
-		// MainPage.talentTraits6.sendKeys(Integer.toHexString(Modules.randGeneration()));
-		// MainPage.talentTraits7.sendKeys(Integer.toHexString(Modules.randGeneration()));
-		// MainPage.talentTraits8.sendKeys(Integer.toHexString(Modules.randGeneration()));
-		// MainPage.talentTraits9.sendKeys(Integer.toHexString(Modules.randGeneration()));
-		// MainPage.talentTraits10.sendKeys(Integer.toHexString(Modules.randGeneration()));
-		// MainPage.talentTraits11.sendKeys(Integer.toHexString(Modules.randGeneration()));
-		// MainPage.talentTraits12.sendKeys(Integer.toHexString(Modules.randGeneration()));
-		// MainPage.talentTraits13.sendKeys(Integer.toHexString(Modules.randGeneration()));
-		// MainPage.talentTraits14.sendKeys(Integer.toHexString(Modules.randGeneration()));
-		// MainPage.talentTraits15.sendKeys(Integer.toHexString(Modules.randGeneration()));
-		// MainPage.talentTraits16.sendKeys(Integer.toHexString(Modules.randGeneration()));
-		// MainPage.talentTraits17.sendKeys(Integer.toHexString(Modules.randGeneration()));
-		// MainPage.talentTraits18.sendKeys(Integer.toHexString(Modules.randGeneration()));
-		// MainPage.nextBtnCategory.click();
-		// MainPage.personTraits1.click();
-		// MainPage.nextBtnCategory.click();
-		// MainPage.nextBtnCategory.click();
-		// MainPage.nextBtnCategory.click();
-		// MainPage.nextBtnCategory.click();
-		// MainPage.nextBtnCategory.click();
-		// MainPage.nextBtnCategory.click();
-		// MainPage.nextBtnCategory.click();
-		//
-	}
+        MainPage.nextBtnCategory.click();
+        MainPage.nextBtnCategory.click();
+        MainPage.nextBtnCategory.click();
+        MainPage.nextBtnCategory.click();
+        MainPage.nextBtnCategory.click();
+        MainPage.nextBtnCategory.click();
 
-	@AfterMethod
-	public void tearDown() throws Exception {
-		// driver.quit();
-	}
+        //System.out.print(MainPage.talentCreatedFirstRowName.getText()+"**************************************");
+        String fullName = firstName + " " + middleName + " " + lastName;
+        assertEquals(MainPage.talentCreatedFirstRowName.getText(), fullName);
+    }
+
+    @AfterMethod
+    public void tearDown() throws Exception {
+        driver.quit();
+    }
 }

@@ -4,16 +4,19 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
+import org.openqa.selenium.support.PageFactory;
 
 public class MainPage {
 	
 	public static WebDriver driver;
-	
-	public MainPage (WebDriver driver){
-		MainPage.driver = driver;
-	}
-	
-	@FindBy(how=How.XPATH, using="html/body/app/ui-view/public-area/div/footer/div[1]")
+
+    /****************************************************************************************************************************
+     * Talent Traits Page
+     */
+
+    public static final String traitStart = ".//*[@id='talentForm']/wizard-form/div/div[1]/div[1]/fieldset[3]/div[2]/div/div[2]/div/fieldset[";
+
+    @FindBy(how=How.XPATH, using="html/body/app/ui-view/public-area/div/footer/div[1]")
 	public static WebElement mainPageInfo;
 	
 	@FindBy(how=How.CLASS_NAME, using="icon-user")
@@ -27,75 +30,88 @@ public class MainPage {
 		
 	@FindBy(how=How.XPATH, using="html/body/app/ui-view/public-area/div/ui-view/talents-section/div/section/div/div/spinner-container/div[1]/div/div[1]/div/div/div/a")
 	public static WebElement createNewTalentBtn ;
-	
-	@FindBy(how=How.XPATH, using=".//*[@id='talentForm']/wizard-form/div/div[1]/div[1]/fieldset[1]/div/div/div/div/div/div[1]/span/span[1]")
-	public static WebElement categoryChouse;
-		
-	@FindBy(how=How.XPATH, using=".//*[@id='talentForm']/wizard-form/div/div[1]/div[1]/fieldset[1]/div/div/div/div/div/ul/li/div/span")
-	public static WebElement categoryChouseEngineering;
-	
-	@FindBy(how=How.XPATH, using=".//*[@id='talentForm']/wizard-form/div/div[1]/div[1]/fieldset[1]/div/div/div/div/div/ul/li/div[4]/span")
-	public static WebElement categoryChouseDesign;
-		
+    public static final String traitFinish = "]/trait-scaler/button[";
+    public static final String traitFinishLastSimbol = "]";
+    /***************************************************************************************************************************
+     * Personality Traits Page
+     */
+
+    public static final String personalityTraitStart = ".//*[@id='talentForm']/wizard-form/div/div[1]/div[1]/fieldset[4]/div/div/table/tbody/tr[";
+    public static final String personalityTraitFinish = "]/td[2]/label/span";
+    @FindBy(how = How.XPATH, using = ".//*[@id='talentForm']/wizard-form/div/div[1]/div[1]/fieldset[1]/div[1]/div/div/div[1]/span")
+    public static WebElement categoryChouse;
+    @FindBy(how = How.XPATH, using = "html/body/app/ui-view/public-area/div/ui-view/talent/div/section/div/div/spinner-container/div[1]/div/div/talent-form/form/wizard-form/div/div[1]/div[1]/fieldset[1]/div[1]/div/div/ul/li/div[3]/span")
+    public static WebElement categoryChouseEngineering;
+    /************************************************************************************************************************************
+     *   Talent personal information page
+     */
+
+    @FindBy(how = How.XPATH, using = ".//*[@id='talentForm']/wizard-form/div/div[1]/div[1]/fieldset[2]/div/div/div[1]/div[1]/input")
+    public static WebElement firstName;
+    @FindBy(how = How.XPATH, using = ".//*[@id='talentForm']/wizard-form/div/div[1]/div[1]/fieldset[2]/div/div/div[1]/div[2]/input")
+    public static WebElement middleName;
+    @FindBy(how = How.XPATH, using = ".//*[@id='talentForm']/wizard-form/div/div[1]/div[1]/fieldset[2]/div/div/div[1]/div[3]/input")
+    public static WebElement lastName;
+    @FindBy(how = How.XPATH, using = ".//*[@id='talentForm']/wizard-form/div/div[1]/div[1]/fieldset[2]/div/div/div[2]/div[1]/div[1]/div/span/button")
+    public static WebElement talentPicBtn;
+    @FindBy(how = How.XPATH, using = ".//*[@id='talentForm']/wizard-form/div/div[1]/div[1]/fieldset[2]/div/div/div[3]/div/label[1]/span")
+    public static WebElement sexMaleRadioBtn;
+    @FindBy(how = How.XPATH, using = ".//*[@id='talentForm']/wizard-form/div/div[1]/div[1]/fieldset[2]/div/div/div[3]/div/label[2]/span")
+    public static WebElement sexFemaleRadioBtn;
+    @FindBy(how = How.XPATH, using = ".//*[@id='talentForm']/wizard-form/div/div[1]/div[1]/fieldset[2]/div/div/div[3]/div/label[3]/span")
+    public static WebElement sexOtherRadioBtn;
+    @FindBy(how = How.XPATH, using = ".//*[@id='talentForm']/wizard-form/div/div[1]/div[1]/fieldset[2]/div/div/div[4]/div[1]/div/input")
+    public static WebElement dateOfBirth;
+    @FindBy(how = How.XPATH, using = ".//*[@id='talentForm']/wizard-form/div/div[1]/div[1]/fieldset[2]/div/div/div[4]/div[1]/div/input")
+    public static WebElement placeOfBirth;
+    @FindBy(how = How.XPATH, using = ".//*[@id='talentForm']/wizard-form/div/div[1]/div[1]/fieldset[2]/div/div/div[5]/div/div/input[1]")
+    public static WebElement country;
+    @FindBy(how = How.XPATH, using = ".//*[@id='talentForm']/wizard-form/div/div[1]/div[1]/fieldset[2]/div/div/div[7]/div/input")
+    public static WebElement city;
+    @FindBy(how = How.ID, using = "address")
+    public static WebElement adressL1;
+    @FindBy(how = How.XPATH, using = ".//*[@id='talentForm']/wizard-form/div/div[1]/div[1]/fieldset[2]/div/div/div[6]/div/div/div[2]/input")
+    public static WebElement adressL2;
+    @FindBy(how = How.XPATH, using = ".//*[@id='talentForm']/wizard-form/div/div[1]/div[1]/fieldset[2]/div/div/div[8]/div/input")
+    public static WebElement state;
+    @FindBy(how = How.XPATH, using = ".//*[@id='talentForm']/wizard-form/div/div[1]/div[1]/fieldset[2]/div/div/div[9]/div/input")
+    public static WebElement postCode;
+    @FindBy(how = How.XPATH, using = ".//*[@id='talentForm']/wizard-form/div/div[1]/div[1]/fieldset[2]/div/div/div[10]/div")
+    public static WebElement locationGropuRadioBtn;
+    @FindBy(how = How.XPATH, using = ".//*[@id='talentForm']/wizard-form/div/div[1]/div[1]/fieldset[2]/div/div/div[11]/div")
+    public static WebElement locationStatusGropuRadioBtn;
+
+    /**
+     * ********************************************************************************************************************************
+     */
+    @FindBy(how = How.XPATH, using = ".//*[@id='talentForm']/wizard-form/div/div[1]/div[1]/fieldset[2]/div/div/div[12]/div[1]/input")
+    public static WebElement email;
+    @FindBy(how = How.XPATH, using = ".//*[@id='talentForm']/wizard-form/div/div[1]/div[1]/fieldset[2]/div/div/div[12]/div[2]/input")
+    public static WebElement phone;
+    @FindBy(how = How.XPATH, using = ".//*[@id='talentForm']/wizard-form/div/div[1]/div[1]/fieldset[2]/div/div/div[14]/div/input")
+    public static WebElement height;
+    //**************************************************************************************************************************
+    @FindBy(how = How.XPATH, using = ".//*[@id='talentForm']/wizard-form/div/div[1]/div[1]/fieldset[2]/div/div/div[15]/div/input")
+    public static WebElement weight;
+    /***************************************************************************************************************************
+     * Story Page
+     */
+    @FindBy(how = How.XPATH, using = ".//*[@id='talentForm']/wizard-form/div/div[1]/div[1]/fieldset[5]/div/div/div[3]/div/select")
+    public static WebElement interestLevelStoryPageSelectElement;
+
+    //**************************************************************************************************************************
+    @FindBy(how = How.XPATH, using = "html/body/app/ui-view/public-area/div/ui-view/talents-section/div/section/div/div/spinner-container/div[1]/div/div[2]/table/tbody/tr/td[2]/a")
+    public static WebElement talentCreatedFirstRowName;
+
+//***************************************************************************************************************************
+
+
 	@FindBy(how=How.XPATH, using=".//*[@id='talentForm']/wizard-form/div/div[2]/button[2]")
-	public static WebElement nextBtnCategory ;
-	
-	@FindBy(how=How.XPATH, using=".//*[@id='traits']/tbody/tr[1]/td[2]/input")
-	public static WebElement talentTraits1 ;
-	
-	@FindBy(how=How.XPATH, using=".//*[@id='traits']/tbody/tr[2]/td[2]/input")
-	public static WebElement talentTraits2 ;
+	public static WebElement nextBtnCategory;
 
-	@FindBy(how=How.XPATH, using=".//*[@id='traits']/tbody/tr[3]/td[2]/input")
-	public static WebElement talentTraits3 ;
-
-	@FindBy(how=How.XPATH, using=".//*[@id='traits']/tbody/tr[4]/td[2]/input")
-	public static WebElement talentTraits4 ;
-
-	@FindBy(how=How.XPATH, using=".//*[@id='traits']/tbody/tr[5]/td[2]/input")
-	public static WebElement talentTraits5 ;
-
-	@FindBy(how=How.XPATH, using=".//*[@id='traits']/tbody/tr[6]/td[2]/input")
-	public static WebElement talentTraits6 ;
-
-	@FindBy(how=How.XPATH, using=".//*[@id='traits']/tbody/tr[7]/td[2]/input")
-	public static WebElement talentTraits7 ;
-
-	@FindBy(how=How.XPATH, using=".//*[@id='traits']/tbody/tr[8]/td[2]/input")
-	public static WebElement talentTraits8 ;
-
-	@FindBy(how=How.XPATH, using=".//*[@id='traits']/tbody/tr[9]/td[2]/input")
-	public static WebElement talentTraits9 ;
-
-	@FindBy(how=How.XPATH, using=".//*[@id='traits']/tbody/tr[10]/td[2]/input")
-	public static WebElement talentTraits10 ;
-
-	@FindBy(how=How.XPATH, using=".//*[@id='traits']/tbody/tr[11]/td[2]/input")
-	public static WebElement talentTraits11 ;
-
-	@FindBy(how=How.XPATH, using=".//*[@id='traits']/tbody/tr[12]/td[2]/input")
-	public static WebElement talentTraits12 ;
-	
-	@FindBy(how=How.XPATH, using=".//*[@id='traits']/tbody/tr[13]/td[2]/input")
-	public static WebElement talentTraits13 ;
-
-	@FindBy(how=How.XPATH, using=".//*[@id='traits']/tbody/tr[14]/td[2]/input")
-	public static WebElement talentTraits14 ;
-
-	@FindBy(how=How.XPATH, using=".//*[@id='traits']/tbody/tr[15]/td[2]/input")
-	public static WebElement talentTraits15 ;
-	
-	@FindBy(how=How.XPATH, using=".//*[@id='traits']/tbody/tr[16]/td[2]/input")
-	public static WebElement talentTraits16 ;
-	
-	@FindBy(how=How.XPATH, using=".//*[@id='traits']/tbody/tr[17]/td[2]/input")
-	public static WebElement talentTraits17 ;
-	
-	@FindBy(how=How.XPATH, using=".//*[@id='traits']/tbody/tr[18]/td[2]/input")
-	public static WebElement talentTraits18 ;	
-	
-	@FindBy(how=How.XPATH, using=".//*[@id='talentForm']/wizard-form/div/div[1]/div[1]/fieldset[4]/div/div/table/tbody/tr[1]/td[2]/label/span")
-	public static WebElement personTraits1 ;
+    public MainPage(WebDriver driver) {
+        PageFactory.initElements(driver, this);
+    }
 		
 	}
 	

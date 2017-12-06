@@ -1,8 +1,8 @@
 package com.Promytheus.pages;
 
 public class Util {
-	
-    public static final String FILE_PATH = "C:\\Users\\Alex\\Documents\\Selenium\\GURU\\testData.xls"; 
+
+    public static final String TEST_DATA_FILE_PATH = "C:\\Users\\Alex\\Documents\\QA UBER\\qauber\\src\\test\\java\\com\\Promytheus\\testdata\\TestData.xlsx";
     public static final String SHEET_NAME = "Data"; 
     public static final String TABLE_NAME = "testData"; 
 

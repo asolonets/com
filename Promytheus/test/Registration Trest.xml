@@ -6,17 +6,21 @@
     <parameter name="lastName" value="Sol"/>
     <parameter name="signUpAddress" value="66 Market str."/>
     <parameter name="city" value="San Francisco"/>
-    <parameter name="email" value="ekkddrrrrk@kfkeefkf.com"/>
+    <parameter name="email" value="ekkddrrrrrrk@kfkeeeefkf.com"/>
     <parameter name="phone" value="4153556577"/>
     <parameter name="state" value="CA"/>
     <parameter name="postCode" value="94111"/>
     <parameter name="password" value="123456"/>
+    <parameter name="sex" value="Male"/>
+    <parameter name="dateOfBirth" value="01011999"/>
     <test name="registrationTest">
         <classes>
-            <class name="com.Promytheus.test.RegistrationTest">
+            <class name="com.Promytheus.test.NewTalentCreation">
                 <methods>
-                    <include name="registrationTestCase" />
-                    <include name="registrationCheckTestCase" />
+                    <!--include name="registrationTestCase" />
+                    <include name="registrationCheckTestCase" /-->
+                    <include name="newTalentCreation"/>
+
                 </methods>
 
             </class>
