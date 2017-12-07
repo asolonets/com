@@ -50,6 +50,7 @@ public class LoginTest {
     @BeforeMethod
     public void setUp() throws Exception {
         driver = new FirefoxDriver();
+        driver.manage().window().maximize();
         baseUrl = Util.BASE_URL;
         driver.get(baseUrl);
         driver.manage().timeouts().implicitlyWait(Util.WAIT_TIME, TimeUnit.SECONDS);

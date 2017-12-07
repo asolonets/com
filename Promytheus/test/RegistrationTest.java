@@ -38,13 +38,13 @@ public class RegistrationTest {
     @BeforeMethod
     public void setUp() throws Exception {
         driver = new FirefoxDriver();
+        driver.manage().window().maximize();
         baseUrl = Util.BASE_URL;
         driver.get(baseUrl);
         driver.manage().timeouts().implicitlyWait(Util.WAIT_TIME, TimeUnit.SECONDS);
     }
 
     @Test(priority = 0, dataProvider = "RegistrationTestData")
-
     public void registrationTestCase(String firstName,
                                      String middleName,
                                      String lastName,
@@ -75,11 +75,12 @@ public class RegistrationTest {
 
     }
 
-    @Test(priority = 1, dataProvider = "NewTalentTestData")
+    @Test(priority = 1, dataProvider = "RegistrationCheckTest")
     //@Parameters({"firstName", "middleName", "lastName", "signUpAddress", "city", "email", "phone", "state", "postCode", "password"})
     public void registrationCheckTestCase(String firstName,
                                           String middleName,
                                           String lastName,
+                                          String dateOfBirth,
                                           String signUpAddress,
                                           String city,
                                           String email,
@@ -89,6 +90,7 @@ public class RegistrationTest {
                                           String password) throws InterruptedException {
         Modules modules = new Modules();
         MainPage mainPage = new MainPage(driver);
+        LoginPage login = new LoginPage(driver);
         MyProfilePage myProfilePage = new MyProfilePage(driver);
         modules.login(email, password);
         Thread.sleep(2000);

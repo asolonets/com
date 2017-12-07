@@ -11,7 +11,7 @@ public class MyProfilePage {
     public MyProfilePage(WebDriver driver) {
         PageFactory.initElements(driver, this);
     }
-    
+
     public static WebDriver driver;
     @FindBy(how = How.ID, using = "firstName")
     public static WebElement firstName;

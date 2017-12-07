@@ -34,6 +34,7 @@ public class NewTalentCreation {
     @BeforeMethod
     public void setUp() throws Exception {
         driver = new FirefoxDriver();
+        driver.manage().window().maximize();
         baseUrl = Util.BASE_URL;
         driver.get(baseUrl);
         driver.manage().timeouts().implicitlyWait(Util.WAIT_TIME, TimeUnit.SECONDS);
@@ -99,11 +100,15 @@ public class NewTalentCreation {
         sel.selectByIndex(2);
 
         mainPage.nextBtnCategory.click();
+        Thread.sleep(2000);
         mainPage.nextBtnCategory.click();
         mainPage.nextBtnCategory.click();
         mainPage.nextBtnCategory.click();
+        Thread.sleep(2000);
         mainPage.nextBtnCategory.click();
+        Thread.sleep(2000);
         mainPage.nextBtnCategory.click();
+        Thread.sleep(2000);
 
         //System.out.print(MainPage.talentCreatedFirstRowName.getText()+"**************************************");
         String fullName = firstName + " " + middleName + " " + lastName;
