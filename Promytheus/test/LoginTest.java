@@ -26,13 +26,13 @@ public class LoginTest {
         Object[][] data = new Object[4][2];
 
         // 1st row
-        data[0][0] = Util.USER_NAME;
-        data[0][1] = Util.PASSWD;
+        data[0][0] = Util.getUserName();
+        data[0][1] = Util.getPASSWD();
         // 2nd row
         data[1][0] = "invalid";
-        data[1][1] = Util.PASSWD;
+        data[1][1] = Util.getPASSWD();
         // 3rd row
-        data[2][0] = Util.USER_NAME;
+        data[2][0] = Util.getUserName();
         data[2][1] = "invalid";
         // 4th row
         data[3][0] = "invalid";
@@ -42,7 +42,7 @@ public class LoginTest {
 
     @DataProvider(name = "loginTestData")
     public Object[][] loginTestData() throws Exception {
-        ExcelUtility.setExcelFile(Util.TEST_DATA_FILE_PATH, "LoginTests");
+        ExcelUtility.setExcelFile(Util.getTestDataFilePath(), "LoginTests");
         Object[][] testData = ExcelUtility.getTestData("loginTestData");
         return testData;
     }
@@ -51,9 +51,9 @@ public class LoginTest {
     public void setUp() throws Exception {
         driver = new FirefoxDriver();
         driver.manage().window().maximize();
-        baseUrl = Util.BASE_URL;
+        baseUrl = Util.getBaseUrl();
         driver.get(baseUrl);
-        driver.manage().timeouts().implicitlyWait(Util.WAIT_TIME, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(Util.getWaitTime(), TimeUnit.SECONDS);
     }
 
     @Test(dataProvider = "loginTestData")
@@ -65,9 +65,9 @@ public class LoginTest {
         modules.login(userName, password);
         Thread.sleep(2000);
         if (userName.toString().equals("Invalid") || password.toString().equals("Invalid")) {
-            softAccert.assertEquals(loginPage.loginError.getText(), Util.EXPECT_LOGIN_ERROR);
+            softAccert.assertEquals(loginPage.loginError.getText(), Util.getExpectLoginError());
         } else {
-            softAccert.assertEquals(mainPage.mainPageInfo.getText(), Util.EXPECT_IN_MAIN_PAGE);
+            softAccert.assertEquals(mainPage.mainPageInfo.getText(), Util.getExpectInMainPage());
         }
     }
 

@@ -24,14 +24,14 @@ public class RegistrationTest {
 
     @DataProvider(name = "RegistrationTestData")
     public Object[][] loginTestData() throws Exception {
-        ExcelUtility.setExcelFile(Util.TEST_DATA_FILE_PATH, "RegistrationTest");
+        ExcelUtility.setExcelFile(Util.getTestDataFilePath(), "RegistrationTest");
         Object[][] testData = ExcelUtility.getTestData("RegistrationTestData");
         return testData;
     }
 
     @DataProvider(name = "RegistrationCheckTest")
     public Object[][] registrationCheckTestData() throws Exception {
-        ExcelUtility.setExcelFile(Util.TEST_DATA_FILE_PATH, "RegistrationCheckTest");
+        ExcelUtility.setExcelFile(Util.getTestDataFilePath(), "RegistrationCheckTest");
         Object[][] testData = ExcelUtility.getTestData("RegistrationCheckTest");
         return testData;
     }
@@ -39,9 +39,9 @@ public class RegistrationTest {
     public void setUp() throws Exception {
         driver = new FirefoxDriver();
         driver.manage().window().maximize();
-        baseUrl = Util.BASE_URL;
+        baseUrl = Util.getBaseUrl();
         driver.get(baseUrl);
-        driver.manage().timeouts().implicitlyWait(Util.WAIT_TIME, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(Util.getWaitTime(), TimeUnit.SECONDS);
     }
 
     @Test(priority = 0, dataProvider = "RegistrationTestData")

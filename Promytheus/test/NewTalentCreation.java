@@ -26,7 +26,7 @@ public class NewTalentCreation {
 
     @DataProvider(name = "NewTalentTestData")
     public Object[][] newTalentTestData() throws Exception {
-        ExcelUtility.setExcelFile(Util.TEST_DATA_FILE_PATH, "NewTalentTest");
+        ExcelUtility.setExcelFile(Util.getTestDataFilePath(), "NewTalentTest");
         Object[][] testData = ExcelUtility.getTestData("NewTalentTestData");
         return testData;
     }
@@ -35,9 +35,9 @@ public class NewTalentCreation {
     public void setUp() throws Exception {
         driver = new FirefoxDriver();
         driver.manage().window().maximize();
-        baseUrl = Util.BASE_URL;
+        baseUrl = Util.getBaseUrl();
         driver.get(baseUrl);
-        driver.manage().timeouts().implicitlyWait(Util.WAIT_TIME, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(Util.getWaitTime(), TimeUnit.SECONDS);
     }
 
     @Test(dataProvider = "NewTalentTestData")
@@ -55,7 +55,7 @@ public class NewTalentCreation {
         // Modules.login(Util.USER_NAME, Util.PASSWD);
         Modules modules = new Modules();
         LoginPage login = new LoginPage(driver);
-        modules.login(Util.USER_NAME, Util.PASSWD);
+        modules.login(Util.getUserName(), Util.getPASSWD());
         MainPage mainPage = new MainPage(driver);
         assertTrue(modules.isLoginSucsessful());
 
