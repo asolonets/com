@@ -88,7 +88,7 @@ public class RegistrationTest {
                                           String state,
                                           String postCode,
                                           String password) throws InterruptedException {
-        Modules modules = new Modules();
+        Modules modules = new Modules(driver);
         MainPage mainPage = new MainPage(driver);
         LoginPage login = new LoginPage(driver);
         MyProfilePage myProfilePage = new MyProfilePage(driver);

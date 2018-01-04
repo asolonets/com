@@ -53,7 +53,7 @@ public class NewTalentCreation {
                                   String state,
                                   String postCode) throws InterruptedException {
         // Modules.login(Util.USER_NAME, Util.PASSWD);
-        Modules modules = new Modules();
+        Modules modules = new Modules(driver);
         LoginPage login = new LoginPage(driver);
         modules.login(Util.getUserName(), Util.getPASSWD());
         MainPage mainPage = new MainPage(driver);
