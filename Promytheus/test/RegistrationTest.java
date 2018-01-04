@@ -1,48 +1,14 @@
 package com.Promytheus.test;
 
 import com.Promytheus.modules.Modules;
-import com.Promytheus.modules.datadriven.ExcelUtility;
 import com.Promytheus.pages.LoginPage;
 import com.Promytheus.pages.MainPage;
 import com.Promytheus.pages.MyProfilePage;
 import com.Promytheus.pages.RegistrationPage;
-import com.Promytheus.testdata.Util;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
-import java.util.concurrent.TimeUnit;
-
-public class RegistrationTest {
-
-    private WebDriver driver;
-    private String baseUrl;
-
-    @DataProvider(name = "RegistrationTestData")
-    public Object[][] loginTestData() throws Exception {
-        ExcelUtility.setExcelFile(Util.getTestDataFilePath(), "RegistrationTest");
-        Object[][] testData = ExcelUtility.getTestData("RegistrationTestData");
-        return testData;
-    }
-
-    @DataProvider(name = "RegistrationCheckTest")
-    public Object[][] registrationCheckTestData() throws Exception {
-        ExcelUtility.setExcelFile(Util.getTestDataFilePath(), "RegistrationCheckTest");
-        Object[][] testData = ExcelUtility.getTestData("RegistrationCheckTest");
-        return testData;
-    }
-    @BeforeMethod
-    public void setUp() throws Exception {
-        driver = new FirefoxDriver();
-        driver.manage().window().maximize();
-        baseUrl = Util.getBaseUrl();
-        driver.get(baseUrl);
-        driver.manage().timeouts().implicitlyWait(Util.getWaitTime(), TimeUnit.SECONDS);
-    }
+public class RegistrationTest extends BaseTest {
 
     @Test(priority = 0, dataProvider = "RegistrationTestData")
     public void registrationTestCase(String firstName,
@@ -111,8 +77,5 @@ public class RegistrationTest {
         softAssert.assertAll();
     }
 
-    @AfterMethod
-    public void tearDown() throws Exception {
-        driver.quit();
-    }
+
 }

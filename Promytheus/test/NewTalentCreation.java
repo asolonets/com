@@ -1,44 +1,17 @@
 package com.Promytheus.test;
 
 import com.Promytheus.modules.Modules;
-import com.Promytheus.modules.datadriven.ExcelUtility;
 import com.Promytheus.pages.LoginPage;
 import com.Promytheus.pages.MainPage;
 import com.Promytheus.testdata.Util;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-
-import java.util.concurrent.TimeUnit;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
-public class NewTalentCreation {
-
-    private WebDriver driver;
-    private String baseUrl;
-
-    @DataProvider(name = "NewTalentTestData")
-    public Object[][] newTalentTestData() throws Exception {
-        ExcelUtility.setExcelFile(Util.getTestDataFilePath(), "NewTalentTest");
-        Object[][] testData = ExcelUtility.getTestData("NewTalentTestData");
-        return testData;
-    }
-
-    @BeforeMethod
-    public void setUp() throws Exception {
-        driver = new FirefoxDriver();
-        driver.manage().window().maximize();
-        baseUrl = Util.getBaseUrl();
-        driver.get(baseUrl);
-        driver.manage().timeouts().implicitlyWait(Util.getWaitTime(), TimeUnit.SECONDS);
-    }
+public class NewTalentCreation extends BaseTest {
 
     @Test(dataProvider = "NewTalentTestData")
     public void newTalentCreation(String firstName,
@@ -115,8 +88,5 @@ public class NewTalentCreation {
         assertEquals(mainPage.talentCreatedFirstRowName.getText(), fullName);
     }
 
-    @AfterMethod
-    public void tearDown() throws Exception {
-        driver.quit();
-    }
+
 }
